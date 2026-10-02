@@ -1,18 +1,59 @@
-# Informe automático NOVA · Inteligencia de Negocios y Data Storytelling
+# Brief ejecutivo NOVA · Inteligencia de Negocios y Data Storytelling (MBA)
 
-Brief semanal para comité: datos del caso NOVA, gráficos locales, narrativa con **Groq**, envío con **Gmail**, orquestado en **GitHub Actions**.
+Informe semanal para comité: datos del caso **NOVA S.A.S.**, tres gráficos locales, narrativa con **Groq (Qwen)**, envío con **Gmail**, orquestado en **GitHub Actions**.
 
-No usa FRED: los CSV en `data/` vienen del caso pedagógico (`datos/generar_nova.py` en el repo MBA).
+Misma arquitectura que [Informe_recesion](https://github.com/owoc9103/Informe_recesion) (ML · probabilidad de recesión FRED), adaptada al MBA: **sin FRED**, CSV en `data/` generados con `datos/generar_nova.py` en [clase_MBA](https://github.com/owoc9103/clase_MBA).
 
-## Flujo
+---
 
-1. `automation/build_brief.py` → `nova_brief.json` + PNG en `automation/output/figuras/`
-2. `automation/generate_email.py` → HTML + correo (si hay secretos)
+## Qué hace
 
-## Entrega (fork)
+Cada lunes (repo del profesor) o **viernes 7:00 Colombia** (fork del estudiante), GitHub Actions:
 
-Igual que el taller de recesión en ML: fork propio, secretos en GitHub, **único cambio de código** el cron a viernes 7:00 Colombia (`0 12 * * 5`).
+1. Lee `ficha_nova.json`, ventas semanales y pronósticos en `data/`.
+2. Calcula KPIs y dibuja tres PNG.
+3. Escribe `automation/output/nova_brief.json`.
+4. **Qwen** redacta el memorando en español.
+5. **Gmail** envía el correo con gráficos incrustados.
 
-Secretos: `GROQ_API_KEY`, `MAIL_USERNAME`, `MAIL_PASSWORD`, `MAIL_PORT`, `EMAIL_TO`.
+---
 
-Repositorio del curso: [Informe_Recesion_MBA](https://github.com/owoc9103/Informe_Recesion_MBA) (brief NOVA · MBA). Material relacionado en [clase_MBA](https://github.com/owoc9103/clase_MBA).
+## Arranque rápido
+
+### Fork (entrega MBA)
+
+1. Fork de este repo en tu cuenta.
+2. **Secretos** (Settings → Secrets → Actions): `GROQ_API_KEY`, `MAIL_USERNAME`, `MAIL_PASSWORD`, `MAIL_PORT`, `EMAIL_TO`.
+3. **Workflow permissions:** Read and write.
+4. **Actions** habilitado en el fork.
+5. **Único cambio de código:** en `.github/workflows/weekly_nova_brief.yml`, cron `0 12 * * 5` (viernes 7:00 Colombia).
+6. **Run workflow** para probar.
+
+### Local (Windows)
+
+```powershell
+.\ejecutar_local.ps1
+```
+
+Claves en `.env` (ver `.env.ejemplo`). No subir `.env`.
+
+---
+
+## Estructura
+
+```
+├── automation/
+│   ├── build_brief.py
+│   ├── generate_email.py
+│   └── output/
+├── data/
+│   ├── ficha_nova.json
+│   ├── ventas_semanales.csv
+│   └── pronosticos.csv
+├── .github/workflows/weekly_nova_brief.yml
+├── ejecutar_local.ps1
+├── requirements.txt
+└── README.md
+```
+
+Presentación y guía paso a paso: carpeta `Sesion_IA_Decisiones` en [clase_MBA](https://github.com/owoc9103/clase_MBA).
