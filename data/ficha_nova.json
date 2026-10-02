@@ -1,0 +1,21 @@
+{
+  "clientes_panel": 5000,
+  "transacciones": 168071,
+  "desde": "2024-01-01",
+  "hasta": "2026-10-02",
+  "ventas_12m": 10315523979.64,
+  "ventas_12m_prev": 9988093676.12,
+  "ticket_media": 146689.8549478115,
+  "ticket_mediana": 104629.065,
+  "share_top_2pct": 0.17395998592236567,
+  "margen_tienda": 0.2604633048238176,
+  "margen_ecommerce": 0.22224819299396112,
+  "margen_marketplace": 0.1658757554028951,
+  "caida_ult8_vs_prev8": -0.27023717625990984,
+  "hogar_ult8_vs_prev8": -0.5545793185213048,
+  "hogar_valle_ult8_vs_prev8": -0.6982704354480733,
+  "negativas_antes": 0.16594827586206898,
+  "negativas_despues": 0.7894736842105263,
+  "share_ecommerce_12m": 0.30290968611262414,
+  "crecimiento_12m": 0.03278206173644871
+}

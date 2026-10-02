@@ -1,0 +1,34 @@
+{
+  "run_date": "2026-10-02",
+  "data_through": "2026-10-02",
+  "empresa": "NOVA S.A.S.",
+  "asignatura": "Inteligencia de Negocios y Data Storytelling",
+  "crisp_fase": "Despliegue",
+  "ventas_12m_cop": 10315523979.64,
+  "ventas_12m_texto": "$10,32 mil millones",
+  "crecimiento_12m_pct": 3.28,
+  "caida_ult8_vs_prev8_pct": -27.02,
+  "margen_tienda_pct": 26.05,
+  "margen_ecommerce_pct": 22.22,
+  "margen_marketplace_pct": 16.59,
+  "clientes_panel": 5000,
+  "pronostico": {
+    "modelos_horizonte_8s": {
+      "ARIMA": 155368112.7420979,
+      "Ajuste comercial": 142467112.0996,
+      "Holt": 161695696.97753498,
+      "Holt-Winters": 180636068.9228679,
+      "Naive": 154855556.63,
+      "Promedio móvil": 151871220.2675,
+      "Random Forest": 175124113.6494944,
+      "Suavización simple": 154636071.87861955,
+      "XGBoost": 170497792.0
+    },
+    "modelo_min_mape": null
+  },
+  "graficos": [
+    "ventas_semanales.png",
+    "margen_canal.png",
+    "mape_modelos.png"
+  ]
+}

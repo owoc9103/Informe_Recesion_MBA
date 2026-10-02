@@ -1,0 +1,50 @@
+name: Weekly NOVA Executive Brief
+
+on:
+  schedule:
+    - cron: "0 14 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-brief:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Build NOVA brief
+        run: python automation/build_brief.py
+
+      - name: Generate email via Groq and send
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          MAIL_PORT: ${{ secrets.MAIL_PORT }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: python automation/generate_email.py
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nova-brief-${{ github.run_id }}
+          path: automation/output/
+          retention-days: 90
+
+      - name: Commit updated output
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add automation/output/nova_brief.json
+          git diff --staged --quiet || git commit -m "Update NOVA brief — $(date +%Y-%m-%d)"
+          git push || true
